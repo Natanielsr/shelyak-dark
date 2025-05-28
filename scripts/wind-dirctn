@@ -1,0 +1,38 @@
+#! /bin/bash
+
+# Closebox73
+
+DRCTN=$(cat ~/.cache/weather.json | jq -r '.wind.deg')
+
+if [ $DRCTN = 0 ];
+then
+	echo "Norte"
+elif (( $DRCTN <= 22 )) && (( $DRCTN > 337 )) && (( "$DRCTN" = "0" ));
+then
+	echo "Norte"
+elif (( $DRCTN > 22 )) && (( $DRCTN <= 67 ));
+then
+	echo "Nordeste"
+elif (( $DRCTN > 67 )) && (( $DRCTN <= 112 ));
+then
+	echo "Leste"
+elif (( $DRCTN > 112 )) && (( $DRCTN <= 157 ));
+then
+	echo "Sudeste"
+elif (( $DRCTN > 157 )) && (( $DRCTN <= 202 ));
+then
+	echo "Sul"
+elif (( $DRCTN > 202 )) && (( $DRCTN <= 247 ));
+then
+	echo "Sudoeste"
+elif (( $DRCTN > 247 )) && (( $DRCTN <= 292 ));
+then
+	echo "Oeste"
+elif (( $DRCTN > 292 )) && (( $DRCTN <= 337 ));
+then
+	echo "Noroeste"
+else
+	echo "Nenhum Lugar"
+fi
+
+exit
