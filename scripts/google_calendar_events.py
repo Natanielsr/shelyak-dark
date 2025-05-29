@@ -71,34 +71,32 @@ def format_event_time(event):
         #for full day events
         return "Dia Inteiro"
 
-
 def main():
+    if len(sys.argv) <= 1:
+        print("Nenhum parâmetro fornecido.")
+        return
+
+    option = sys.argv[1]
     events = get_today_events()
 
-    if not events:
-        print("Nenhum evento hoje")
-        return
-    
-    event = events[0]
-    event_name = event.get('summary', 'Evento sem nome')
-    event_time = format_event_time(event)
-
-    # parameters
-    if len(sys.argv) > 1:
-        option = sys.argv[1]
-
-        if option == "-n":
-            #return event name
-            print(f"{event_name}")
-
-        elif option == "-t":
-            #return event time
-            print(f"{event_time}")
+    if option == "-n":
+        # Displays the name of the first event of the day, or message if none exists
+        if events:
+            first_event = events[0]
+            event_name = first_event.get('summary', 'Evento sem nome')
+            print(event_name)
         else:
-            print(f"parameter error")
+            print("Nenhum evento hoje.")
+
+    elif option == "-t":
+        # Displays the time of the first event of the day, but shows nothing if there is none
+        if events:
+            first_event = events[0]
+            event_time = format_event_time(first_event)
+            print(event_time)
+
     else:
-        #no parameter return all
-        print(f"{event_time} - {event_name}")
+        print("Parâmetro inválido.")
 
 if __name__ == '__main__':
     main()
