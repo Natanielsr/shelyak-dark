@@ -86,7 +86,7 @@ def main():
             event_name = first_event.get('summary', 'Evento sem nome')
             print(event_name)
         else:
-            print("Nenhum evento hoje.")
+            print("Nenhum evento.")
 
     elif option == "-t":
         # Displays the time of the first event of the day, but shows nothing if there is none
